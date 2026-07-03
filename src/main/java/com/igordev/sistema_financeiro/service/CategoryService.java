@@ -2,11 +2,10 @@ package com.igordev.sistema_financeiro.service;
 
 import com.igordev.sistema_financeiro.model.Category;
 import com.igordev.sistema_financeiro.enums.CategoryType;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
-@Service
 public interface CategoryService {
     Category create(Category category);
     Category update(Long id, Category category);

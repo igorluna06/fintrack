@@ -6,9 +6,10 @@ import com.igordev.sistema_financeiro.exception.message.ExceptionMessages;
 import com.igordev.sistema_financeiro.model.Category;
 import com.igordev.sistema_financeiro.enums.CategoryType;
 import com.igordev.sistema_financeiro.repository.CategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
