@@ -25,4 +25,6 @@ public class ExceptionMessages {
 
     public static final String TRANSACTION_AMOUNT_RANGE_INVALID = "O valor mínimo não pode ser maior que o valor máximo";
     public static final String TRANSACTION_DATE_RANGE_INVALID = "A data inicial não pode ser posterior à data final";
+
+    public static final String TRANSACTION_TYPE_CATEGORY_MISMATCH = "O tipo da transação deve ser compatível com o tipo da categoria";
 }

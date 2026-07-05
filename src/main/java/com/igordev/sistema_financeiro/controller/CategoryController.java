@@ -65,9 +65,9 @@ public class CategoryController {
     }
 
     @GetMapping("/type")
-    public ResponseEntity<List<Category>> findByCategoryType(@RequestParam CategoryType categoryType) {
+    public ResponseEntity<List<Category>> findByCategoryType(@RequestParam CategoryType type) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                this.categoryService.findByCategoryType(categoryType)
+                this.categoryService.findByType(type)
         );
     }
 

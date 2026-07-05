@@ -2,10 +2,12 @@ package com.igordev.sistema_financeiro.validator;
 
 import com.igordev.sistema_financeiro.exception.BusinessException;
 import com.igordev.sistema_financeiro.exception.message.ExceptionMessages;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Component
 public class TransactionValidator {
 
     public void validateAmount(BigDecimal amount) {

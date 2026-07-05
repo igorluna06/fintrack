@@ -6,13 +6,15 @@ import com.igordev.sistema_financeiro.exception.message.ExceptionMessages;
 import com.igordev.sistema_financeiro.model.Category;
 import com.igordev.sistema_financeiro.enums.CategoryType;
 import com.igordev.sistema_financeiro.repository.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@AllArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public Category create(Category category) {
@@ -21,6 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
         if (category.getType() == null)
             throw new BusinessException(ExceptionMessages.CATEGORY_TYPE_REQUIRED);
+        
         return this.categoryRepository.save(category);
     }
 
@@ -74,10 +77,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> findByCategoryType(CategoryType categoryType) {
-        if(categoryType == null)
+    public List<Category> findByType(CategoryType type) {
+        if(type == null)
             throw new BusinessException(ExceptionMessages.CATEGORY_TYPE_REQUIRED);
-        return this.categoryRepository.findByCategoryType(categoryType);
+        return this.categoryRepository.findByType(type);
     }
 
     @Override

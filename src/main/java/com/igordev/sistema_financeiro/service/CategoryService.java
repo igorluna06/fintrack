@@ -11,7 +11,7 @@ public interface CategoryService {
     Category update(Long id, Category category);
     Category findById(Long id);
     Category findByName(String name);
-    List<Category> findByCategoryType(CategoryType categoryType);
+    List<Category> findByType(CategoryType type);
     List<Category> findAll();
     Category updateName(Long id, String name);
     Category updateType(Long id, CategoryType type);

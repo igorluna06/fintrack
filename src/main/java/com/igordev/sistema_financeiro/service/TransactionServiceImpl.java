@@ -32,6 +32,8 @@ public class TransactionServiceImpl implements TransactionService {
         this.transactionValidator.validateAmount(dto.amount());
         this.transactionValidator.validateDate(dto.date());
         Category category = categoryService.findById(dto.categoryId());
+        if (!category.getType().name().equals(dto.transactionType().name()))
+            throw new BusinessException(ExceptionMessages.TRANSACTION_TYPE_CATEGORY_MISMATCH);
         Transaction transaction = new Transaction();
         transaction.setCategory(category);
         transaction.setDescription(dto.description());
@@ -47,8 +49,12 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction existingTransaction = this.transactionRepository.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException(ExceptionMessages.TRANSACTION_NOT_FOUND));
 
-        if(dto.categoryId() != null){
-            existingTransaction.setCategory(categoryService.findById(dto.categoryId()));
+
+        if (dto.categoryId() != null) {
+            Category category = categoryService.findById(dto.categoryId());
+            if (!category.getType().name().equals(existingTransaction.getType().name()))
+                throw new BusinessException(ExceptionMessages.TRANSACTION_TYPE_CATEGORY_MISMATCH);
+            existingTransaction.setCategory(category);
         }
         if(dto.description() != null){
             existingTransaction.setDescription(dto.description());
@@ -61,7 +67,9 @@ public class TransactionServiceImpl implements TransactionService {
             this.transactionValidator.validateDate(dto.date());
             existingTransaction.setDate(dto.date());
         }
-        if(dto.transactionType() != null){
+        if (dto.transactionType() != null) {
+            if (!existingTransaction.getCategory().getType().name().equals(dto.transactionType().name()))
+                throw new BusinessException(ExceptionMessages.TRANSACTION_TYPE_CATEGORY_MISMATCH);
             existingTransaction.setType(dto.transactionType());
         }
         if(dto.transactionNature() != null){
